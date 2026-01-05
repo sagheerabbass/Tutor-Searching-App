@@ -16,7 +16,26 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from app.views import RegisterView,TutorListView,CustomTokenObtainPairView,MyBookingsView,FavoriteTutorsView,StudentProfileView,tutor_bookings,tutor_profile,my_students,accept_booking,reject_booking,complete_booking,SubjectListView,CreateBookingView,UpdateTutorProfileView,CreateTutorProfileView
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/register/', RegisterView.as_view()),
+    path('api/login/', CustomTokenObtainPairView.as_view()),  # Updated!
+    path('api/token/refresh/', TokenRefreshView.as_view()),
+    path('tutors/', TutorListView.as_view()),
+    path('api/my-bookings/', MyBookingsView.as_view()),
+    path('api/favorite-tutors/', FavoriteTutorsView.as_view()),
+    path('api/favorite-tutors/<int:pk>/', FavoriteTutorsView.as_view()),
+    path('api/student-profile/', StudentProfileView.as_view()),
+    path('api/tutor-profile/', tutor_profile),
+    path('api/tutor-bookings/', tutor_bookings),
+    path('api/my-students/', my_students),
+    path('api/bookings/<int:pk>/accept/', accept_booking),
+    path('api/bookings/<int:pk>/reject/', reject_booking),
+    path('api/bookings/<int:pk>/complete/', complete_booking),
+    path('api/subjects/', SubjectListView.as_view()),  # GET list, POST create
+path('api/tutor-profile/create/', CreateTutorProfileView.as_view()),
+path('api/tutor-profile/update/', UpdateTutorProfileView.as_view()),
 ]
